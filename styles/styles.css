@@ -1,0 +1,452 @@
+/* ══════════════════════════════════════════
+   RESET & BASE
+══════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --blue:   #4D96FF;
+  --red:    #FF6B6B;
+  --green:  #6BCB77;
+  --navy:   #445599;
+  --cyan:   #00D4FF;
+  --white:  #FFFFFF;
+  --card-border: 29px;
+  --card-w: 17.6875rem;
+  --card-h: 17.25rem;
+  --card-active-w: 23.375rem;
+  --card-active-h: 22.5rem;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background: var(--blue);
+  overflow-x: hidden;
+}
+
+/* ══════════════════════════════════════════
+   BLOBS DE BLUR
+══════════════════════════════════════════ */
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.blob-red {
+  width: 40.25rem;
+  height: 35.125rem;
+  border-radius: 40.25rem;
+  background: #FF6B6B;
+  filter: blur(229.85px);
+  top: -8rem;
+  left: -10rem;
+  opacity: .85;
+}
+
+.blob-green {
+  width: 29.75rem;
+  height: 30.625rem;
+  border-radius: 30.625rem;
+  background: #6BCB77;
+  filter: blur(190.25px);
+  top: 5rem;
+  right: -6rem;
+  opacity: .75;
+}
+
+.blob-blue {
+  width: 37.375rem;
+  height: 31.5rem;
+  border-radius: 37.375rem;
+  background: #445599;
+  filter: blur(68.6px);
+  bottom: 2rem;
+  left: 30%;
+  opacity: .7;
+}
+
+/* blobs que "continuam" na section 2 */
+.blob-carry {
+  top: auto;
+  bottom: -12rem;
+  left: -8rem;
+  opacity: .5;
+}
+
+.blob-carry2 {
+  top: auto;
+  bottom: -18rem;
+  right: -4rem;
+  opacity: .4;
+}
+
+/* ══════════════════════════════════════════
+   SECTION 1 — HERO
+══════════════════════════════════════════ */
+.hero {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background: var(--blue);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* ── Logo / Letreiro ── */
+.hero-logo {
+  position: relative;
+  z-index: 2;
+  width: min(62.125rem, 90vw);
+  aspect-ratio: 135 / 91;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: floatLogo 3.5s ease-in-out infinite;
+}
+
+.hero-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* fallback em texto colorido (caso sem imagem) */
+.logo-text-fallback {
+  display: none;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: .25rem;
+  font-family: 'Fredoka One', cursive;
+  font-size: clamp(3rem, 10vw, 7rem);
+  line-height: 1;
+  text-align: center;
+  filter: drop-shadow(0 6px 0 rgba(0,0,0,.25));
+}
+
+.logo-text-fallback span { display: inline-block; }
+
+.logo-j  { color: #FF6B6B; transform: rotate(-8deg); }
+.logo-o  { color: #FFE66D; transform: rotate(4deg); }
+.logo-g  { color: #6BCB77; transform: rotate(-5deg); }
+.logo-o2 { color: #4D96FF; transform: rotate(6deg); }
+.logo-s  { color: #FF6B6B; transform: rotate(-3deg); }
+.logo-d  { color: #FFE66D; transform: rotate(5deg); }
+.logo-o3 { color: #6BCB77; transform: rotate(-4deg); }
+.logo-a  { color: #FF6B6B; transform: rotate(-6deg); }
+.logo-b  { color: #FFE66D; transform: rotate(3deg); }
+.logo-ac { color: #6BCB77; transform: rotate(-4deg); }
+.logo-c  { color: #4D96FF; transform: rotate(5deg); }
+.logo-ad { color: #FF6B6B; transform: rotate(-3deg); }
+.logo-da { color: #FFE66D; transform: rotate(4deg); }
+.logo-a2 { color: #6BCB77; transform: rotate(-5deg); }
+.logo-star { color: white; font-size: .5em; vertical-align: middle; }
+.logo-space { width: .5em; }
+
+@keyframes floatLogo {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-18px); }
+}
+
+/* ── seta de scroll ── */
+.scroll-hint {
+  position: absolute;
+  bottom: 2.5rem;
+  z-index: 3;
+  cursor: pointer;
+  animation: bounce 2s ease-in-out infinite;
+  transition: opacity .2s;
+}
+.scroll-hint:hover { opacity: .7; }
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(10px); }
+}
+
+/* ══════════════════════════════════════════
+   SECTION 2 — JOGOS / CARROSSEL
+══════════════════════════════════════════ */
+.games-section {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background: var(--blue);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4rem 1rem 6rem;
+  overflow: hidden;
+}
+
+/* ── fundo dinâmico ── */
+.game-bg-wrapper {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.game-bg-image {
+  width: min(93.8125rem, 100%);
+  height: min(50.625rem, 70vh);
+  border-radius: 3.5625rem;
+  background: url('') lightgray -31.574px -184.314px / 108.01% 131.879% no-repeat;
+  box-shadow: 0 25px 28.9px 0 rgba(71,47,47,.25);
+  transition: background-image .6s ease, opacity .5s ease;
+  opacity: .45;
+}
+
+.game-bg-gradient {
+  position: absolute;
+  width: min(91.875rem, 100%);
+  height: min(55.125rem, 75vh);
+  border-radius: 3.5625rem;
+  background: radial-gradient(50% 50% at 50% 50%, #00D4FF 66.35%, rgba(26,26,46,0) 100%);
+  box-shadow: 0 25px 28.9px 0 rgba(71,47,47,.25);
+  opacity: .35;
+}
+
+/* ── label ── */
+.section-label {
+  position: relative;
+  z-index: 2;
+  font-family: 'Fredoka One', cursive;
+  font-size: 1rem;
+  letter-spacing: .2em;
+  color: rgba(255,255,255,.7);
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+}
+
+/* ══════════════════════════════════════════
+   CARD EM DESTAQUE (jogo selecionado)
+══════════════════════════════════════════ */
+.featured-card {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  animation: fadeIn .4s ease;
+}
+
+.featured-card-inner {
+  width: clamp(16rem, 23.375rem, 90vw);
+  height: clamp(20rem, 25.6875rem, 80vw);
+  border-radius: 2.9375rem;
+  border: 11px solid var(--green);
+  background: var(--blue);
+  box-shadow: 0 17px 4px 0 var(--green);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.featured-card-image {
+  width: 100%;
+  flex: 1;
+  background: url('') lightgray 50% / cover no-repeat;
+  transition: background-image .5s ease;
+  min-height: clamp(14rem, 20.125rem, 70vw);
+}
+
+.featured-card-info {
+  padding: .75rem 1rem;
+  background: rgba(43,32,32,.72);
+  backdrop-filter: blur(6px);
+}
+
+.featured-title {
+  font-family: 'Fredoka One', cursive;
+  font-size: 1.3rem;
+  color: white;
+  letter-spacing: .05em;
+}
+
+.featured-subtitle {
+  font-size: .8rem;
+  color: rgba(255,255,255,.7);
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+/* ── botão JOGAR ── */
+.btn-jogar {
+  width: clamp(14rem, 20.125rem, 80vw);
+  height: 5.875rem;
+  border-radius: 2.9375rem;
+  border: 11px solid var(--green);
+  background: var(--blue);
+  box-shadow: 0 17px 4px 0 var(--green);
+  color: white;
+  font-family: 'Fredoka One', cursive;
+  font-size: 1.8rem;
+  letter-spacing: .15em;
+  cursor: pointer;
+  transition: transform .15s, box-shadow .15s;
+}
+
+.btn-jogar:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 22px 8px 0 var(--green);
+}
+
+.btn-jogar:active {
+  transform: translateY(2px);
+  box-shadow: 0 10px 4px 0 var(--green);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ══════════════════════════════════════════
+   CARROSSEL DE MINIATURAS
+══════════════════════════════════════════ */
+.carousel-container {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  width: 100%;
+  max-width: 100vw;
+}
+
+.carousel-track-wrapper {
+  flex: 1;
+  overflow: hidden;
+  padding: .5rem 0;
+}
+
+.carousel-track {
+  display: flex;
+  gap: 1.25rem;
+  transition: transform .45s cubic-bezier(.4,0,.2,1);
+  will-change: transform;
+}
+
+/* ── miniatura padrão ── */
+.mini-card {
+  flex-shrink: 0;
+  width: var(--card-w);
+  height: var(--card-h);
+  border-radius: 2rem;
+  border: var(--card-border) solid var(--red);
+  background: lightgray 50% / cover no-repeat;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform .25s, border-color .25s, width .3s, height .3s, box-shadow .25s;
+  filter: blur(1.95px);
+}
+
+.mini-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(43,32,32,.54);
+  transition: opacity .25s;
+}
+
+.mini-card:hover {
+  transform: scale(1.06);
+  filter: blur(0);
+  box-shadow: 0 8px 24px rgba(0,0,0,.3);
+}
+
+.mini-card:hover::after { opacity: .2; }
+
+/* ── miniatura ATIVA ── */
+.mini-card.active {
+  width: var(--card-active-w);
+  height: var(--card-active-h);
+  border: var(--card-border) solid var(--green);
+  filter: blur(0);
+  box-shadow: 0 17px 4px 0 var(--green), 0 0 0 4px rgba(107,203,119,.3);
+  z-index: 2;
+}
+
+.mini-card.active::after { opacity: 0; }
+
+/* número/nome sobre o card */
+.mini-card-label {
+  position: absolute;
+  bottom: .4rem;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-family: 'Fredoka One', cursive;
+  font-size: .75rem;
+  color: rgba(255,255,255,.9);
+  z-index: 3;
+  letter-spacing: .06em;
+  text-shadow: 0 2px 6px rgba(0,0,0,.6);
+  pointer-events: none;
+}
+
+/* ── setas do carrossel ── */
+.carousel-arrow {
+  flex-shrink: 0;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  border: 3px solid white;
+  background: rgba(255,255,255,.15);
+  backdrop-filter: blur(8px);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background .2s, transform .15s;
+}
+
+.carousel-arrow:hover {
+  background: rgba(255,255,255,.35);
+  transform: scale(1.1);
+}
+
+.carousel-arrow:active { transform: scale(.95); }
+
+/* ══════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════ */
+@media (max-width: 768px) {
+  :root {
+    --card-w: 10rem;
+    --card-h: 10rem;
+    --card-active-w: 13rem;
+    --card-active-h: 13rem;
+    --card-border: 18px;
+  }
+
+  .featured-card-inner { border-radius: 1.5rem; }
+  .btn-jogar { font-size: 1.4rem; height: 4.5rem; }
+  .carousel-arrow { width: 2.75rem; height: 2.75rem; }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --card-w: 7.5rem;
+    --card-h: 7.5rem;
+    --card-active-w: 10rem;
+    --card-active-h: 10rem;
+    --card-border: 14px;
+  }
+}

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jogos do Abacadá</title>
+  <link rel="stylesheet" href="styles/styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════
+       SECTION 1 — HERO
+  ════════════════════════════════════════════ -->
+  <section class="hero" id="hero">
+
+    <!-- blobs de blur decorativos -->
+    <div class="blob blob-red"></div>
+    <div class="blob blob-green"></div>
+    <div class="blob blob-blue"></div>
+
+    <!-- letreiro principal (substitua src pela imagem real) -->
+    <div class="hero-logo">
+      <img src="assets/jogosAbacadaLetreiro.png" alt="Jogos do Abacadá"
+           onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'" />
+      <!-- fallback em texto caso não haja imagem -->
+      <div class="logo-text-fallback">
+        <span class="logo-j">J</span><span class="logo-o">O</span><span class="logo-g">G</span><span class="logo-o2">O</span><span class="logo-s">S</span>
+        <span class="logo-space"> </span>
+        <span class="logo-d">D</span><span class="logo-o3">O</span>
+        <br/>
+        <span class="logo-star">✦</span>
+        <span class="logo-a">A</span><span class="logo-b">B</span><span class="logo-ac">A</span><span class="logo-c">C</span><span class="logo-ad">A</span><span class="logo-da">D</span><span class="logo-a2">Á</span>
+      </div>
+    </div>
+
+    <!-- seta para próxima section -->
+    <div class="scroll-hint" onclick="document.getElementById('games').scrollIntoView({behavior:'smooth'})">
+      <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+        <circle cx="20" cy="20" r="19" stroke="white" stroke-width="2" opacity=".6"/>
+        <path d="M13 17l7 7 7-7" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       SECTION 2 — CARROSSEL DE JOGOS
+  ════════════════════════════════════════════ -->
+  <section class="games-section" id="games">
+
+    <!-- blobs continuados da section anterior -->
+    <div class="blob blob-red blob-carry"></div>
+    <div class="blob blob-green blob-carry2"></div>
+
+    <!-- fundo dinâmico do jogo selecionado -->
+    <div class="game-bg-wrapper">
+      <div class="game-bg-image" id="gameBgImage"></div>
+      <div class="game-bg-gradient"></div>
+    </div>
+
+
+    <!-- card central do jogo em destaque -->
+    <div class="featured-card" id="featuredCard">
+      <div class="featured-card-inner">
+        <div class="featured-card-image" id="featuredCardImage"></div>
+        <div class="featured-card-info">
+          <h2 class="featured-title" id="featuredTitle">PISCINA MALUCA</h2>
+          <p class="featured-subtitle" id="featuredSubtitle">AVENTURA AQUÁTICA</p>
+        </div>
+      </div>
+      <button class="btn-jogar" id="btnJogar">JOGAR</button>
+    </div>
+
+    <!-- carrossel de miniaturas -->
+    <div class="carousel-container">
+      <button class="carousel-arrow arrow-left" id="arrowLeft">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+          <path d="M17 6l-8 8 8 8" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+      <div class="carousel-track-wrapper">
+        <div class="carousel-track" id="carouselTrack"></div>
+      </div>
+
+      <button class="carousel-arrow arrow-right" id="arrowRight">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+          <path d="M11 6l8 8-8 8" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+
+  </section>
+
+  <script src="script/script.js"></script>
+</body>
+</html>
