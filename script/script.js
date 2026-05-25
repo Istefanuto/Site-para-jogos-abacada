@@ -11,13 +11,13 @@ const games = [
   {
     id: 2, name: "Ligue as Sílabas", bgColor: "#FFD700",
     image: "./assets/ligueSilaba/fundo.png",
-    cardImage: "/assets/ligueSilaba/cardLigueAsSilabas.png",
+    cardImage: "./assets/ligueSilaba/cardLigueAsSilabas.png",
     url: "https://rafaeltomazgraciano.github.io/ligue-as-silabas/",
   },
   {
     id: 3, name: "O Monstrinho Faminto", bgColor: "#FF6B6B",
     image: "./assets/monstrinhoFaminto/fundo.png",
-    cardImage: "/assets/monstrinhoFaminto/cardMonstrinhoFaminto.png",
+    cardImage: "./assets/monstrinhoFaminto/cardMonstrinhoFaminto.png",
     url: "https://gabrielwitor.github.io/Monstrinho-Faminto/",
   },
   {
@@ -29,19 +29,19 @@ const games = [
   {
     id: 5, name: "Salão das Sílabas", bgColor: "#FF6B6B",
     image: "./assets/salaoSilabas/fundo.png",
-    cardImage: "/assets/salaoSilabas/cardSalao.png",
+    cardImage: "./assets/salaoSilabas/cardSalao.png",
     url: "https://juuhgb.github.io/salao-das-silabas/",
   },
   {
     id: 6, name: "Trem de Sílabas", bgColor: "#FFD700",
     image: "./assets/tremSilabas/fundo.png",
-    cardImage: "/assets/tremSilabas/cardTremSilabas.png",
+    cardImage: "./assets/tremSilabas/cardTremSilabas.png",
     url: "https://giovanariber.github.io/trem-de-silabas-html/",
   },
   {
     id: 7, name: "Robo Montador", bgColor: "#6BCB77",
     image: "./assets/roboMontador/fundo.png",
-    cardImage: "/assets/roboMontador/cardRoboMontador.png",
+    cardImage: "./assets/roboMontador/cardRoboMontador.png",
     url: "https://pauloluzkk.github.io/Game-ABACADA/",
   },
   {
@@ -71,7 +71,7 @@ const games = [
   {
     id: 12, name: "Pesca Sílabas", bgColor: "#FF6B6B",
     image: "./assets/pescaSilabas/fundo.png",
-    cardImage: "/assets/pescaSilabas/image.png",
+    cardImage: "./assets/pescaSilabas/image.png",
     url: "https://m-valentim.github.io/pesca-silabas/",
   },
   {
