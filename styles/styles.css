@@ -9,12 +9,13 @@
   --green:  #6BCB77;
   --navy:   #445599;
   --cyan:   #00D4FF;
+  --yellow: #FFD93D;
   --white:  #FFFFFF;
-  --card-border: 29px;
-  --card-w: 17.6875rem;
-  --card-h: 17.25rem;
-  --card-active-w: 23.375rem;
-  --card-active-h: 22.5rem;
+  --card-border: 22px;
+  --card-w: 13rem;
+  --card-h: 13rem;
+  --card-active-w: 18rem;
+  --card-active-h: 18rem;
 }
 
 html { scroll-behavior: smooth; }
@@ -38,7 +39,6 @@ body {
 .blob-red {
   width: 40.25rem;
   height: 35.125rem;
-  border-radius: 40.25rem;
   background: #FF6B6B;
   filter: blur(229.85px);
   top: -8rem;
@@ -49,7 +49,6 @@ body {
 .blob-green {
   width: 29.75rem;
   height: 30.625rem;
-  border-radius: 30.625rem;
   background: #6BCB77;
   filter: blur(190.25px);
   top: 5rem;
@@ -60,27 +59,11 @@ body {
 .blob-blue {
   width: 37.375rem;
   height: 31.5rem;
-  border-radius: 37.375rem;
   background: #445599;
   filter: blur(68.6px);
   bottom: 2rem;
   left: 30%;
   opacity: .7;
-}
-
-/* blobs que "continuam" na section 2 */
-.blob-carry {
-  top: auto;
-  bottom: -12rem;
-  left: -8rem;
-  opacity: .5;
-}
-
-.blob-carry2 {
-  top: auto;
-  bottom: -18rem;
-  right: -4rem;
-  opacity: .4;
 }
 
 /* ══════════════════════════════════════════
@@ -98,7 +81,6 @@ body {
   overflow: hidden;
 }
 
-/* ── Logo / Letreiro ── */
 .hero-logo {
   position: relative;
   z-index: 2;
@@ -116,7 +98,6 @@ body {
   object-fit: contain;
 }
 
-/* fallback em texto colorido (caso sem imagem) */
 .logo-text-fallback {
   display: none;
   flex-direction: row;
@@ -155,7 +136,6 @@ body {
   50%       { transform: translateY(-18px); }
 }
 
-/* ── seta de scroll ── */
 .scroll-hint {
   position: absolute;
   bottom: 2.5rem;
@@ -182,148 +162,51 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   padding: 4rem 1rem 6rem;
   overflow: hidden;
 }
 
-/* ── fundo dinâmico ── */
+/* ── fundo dinâmico: imagem do jogo com máscara radial difusa ── */
 .game-bg-wrapper {
   position: absolute;
   inset: 0;
   z-index: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
+  pointer-events: none;
 }
 
 .game-bg-image {
-  width: min(93.8125rem, 100%);
-  height: min(50.625rem, 70vh);
-  border-radius: 3.5625rem;
-  background: url('') lightgray -31.574px -184.314px / 108.01% 131.879% no-repeat;
-  box-shadow: 0 25px 28.9px 0 rgba(71,47,47,.25);
-  transition: background-image .6s ease, opacity .5s ease;
-  opacity: .45;
-}
-
-.game-bg-gradient {
   position: absolute;
-  width: min(91.875rem, 100%);
-  height: min(55.125rem, 75vh);
-  border-radius: 3.5625rem;
-  background: radial-gradient(50% 50% at 50% 50%, #00D4FF 66.35%, rgba(26,26,46,0) 100%);
-  box-shadow: 0 25px 28.9px 0 rgba(71,47,47,.25);
-  opacity: .35;
-}
-
-/* ── label ── */
-.section-label {
-  position: relative;
-  z-index: 2;
-  font-family: 'Fredoka One', cursive;
-  font-size: 1rem;
-  letter-spacing: .2em;
-  color: rgba(255,255,255,.7);
-  margin-bottom: 1.5rem;
-  text-transform: uppercase;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  /* máscara radial: visível no centro, desaparece suavemente nas bordas */
+  -webkit-mask-image: radial-gradient(ellipse 65% 60% at 50% 50%, black 30%, transparent 100%);
+  mask-image: radial-gradient(ellipse 65% 60% at 50% 50%, black 30%, transparent 100%);
+  opacity: 0.38;
+  transition: background-image .6s ease, opacity .5s ease;
 }
 
 /* ══════════════════════════════════════════
-   CARD EM DESTAQUE (jogo selecionado)
+   CARROSSEL
 ══════════════════════════════════════════ */
-.featured-card {
+.carousel-wrapper {
   position: relative;
   z-index: 3;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.25rem;
-  animation: fadeIn .4s ease;
-}
-
-.featured-card-inner {
-  width: clamp(16rem, 23.375rem, 90vw);
-  height: clamp(20rem, 25.6875rem, 80vw);
-  border-radius: 2.9375rem;
-  border: 11px solid var(--green);
-  background: var(--blue);
-  box-shadow: 0 17px 4px 0 var(--green);
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-}
-
-.featured-card-image {
+  gap: 0;
   width: 100%;
-  flex: 1;
-  background: url('') lightgray 50% / cover no-repeat;
-  transition: background-image .5s ease;
-  min-height: clamp(14rem, 20.125rem, 70vw);
 }
 
-.featured-card-info {
-  padding: .75rem 1rem;
-  background: rgba(43,32,32,.72);
-  backdrop-filter: blur(6px);
-}
-
-.featured-title {
-  font-family: 'Fredoka One', cursive;
-  font-size: 1.3rem;
-  color: white;
-  letter-spacing: .05em;
-}
-
-.featured-subtitle {
-  font-size: .8rem;
-  color: rgba(255,255,255,.7);
-  font-weight: 700;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-}
-
-/* ── botão JOGAR ── */
-.btn-jogar {
-  width: clamp(14rem, 20.125rem, 80vw);
-  height: 5.875rem;
-  border-radius: 2.9375rem;
-  border: 11px solid var(--green);
-  background: var(--blue);
-  box-shadow: 0 17px 4px 0 var(--green);
-  color: white;
-  font-family: 'Fredoka One', cursive;
-  font-size: 1.8rem;
-  letter-spacing: .15em;
-  cursor: pointer;
-  transition: transform .15s, box-shadow .15s;
-}
-
-.btn-jogar:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 22px 8px 0 var(--green);
-}
-
-.btn-jogar:active {
-  transform: translateY(2px);
-  box-shadow: 0 10px 4px 0 var(--green);
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(16px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-/* ══════════════════════════════════════════
-   CARROSSEL DE MINIATURAS
-══════════════════════════════════════════ */
 .carousel-container {
-  position: relative;
-  z-index: 3;
   display: flex;
   align-items: center;
   gap: 1rem;
-  margin-top: 2rem;
   width: 100%;
   max-width: 100vw;
 }
@@ -331,12 +214,14 @@ body {
 .carousel-track-wrapper {
   flex: 1;
   overflow: hidden;
-  padding: .5rem 0;
+  /* padding vertical para acomodar o card ativo que é maior */
+  padding: 2rem 0 0.5rem;
 }
 
 .carousel-track {
   display: flex;
   gap: 1.25rem;
+  align-items: flex-end; /* alinha pela base para o card ativo crescer para cima */
   transition: transform .45s cubic-bezier(.4,0,.2,1);
   will-change: transform;
 }
@@ -346,45 +231,44 @@ body {
   flex-shrink: 0;
   width: var(--card-w);
   height: var(--card-h);
-  border-radius: 2rem;
+  border-radius: 1.5rem;
   border: var(--card-border) solid var(--red);
   background: lightgray 50% / cover no-repeat;
   cursor: pointer;
   position: relative;
   overflow: hidden;
-  transition: transform .25s, border-color .25s, width .3s, height .3s, box-shadow .25s;
-  filter: blur(1.95px);
+  transition: transform .3s, border-color .3s, width .35s cubic-bezier(.4,0,.2,1), height .35s cubic-bezier(.4,0,.2,1), box-shadow .3s, filter .3s;
+  filter: blur(1.5px) brightness(.85);
 }
 
 .mini-card::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(43,32,32,.54);
+  background: rgba(43,32,32,.45);
   transition: opacity .25s;
 }
 
 .mini-card:hover {
-  transform: scale(1.06);
-  filter: blur(0);
-  box-shadow: 0 8px 24px rgba(0,0,0,.3);
+  transform: scale(1.05);
+  filter: blur(0) brightness(1);
 }
 
-.mini-card:hover::after { opacity: .2; }
+.mini-card:hover::after { opacity: .15; }
 
 /* ── miniatura ATIVA ── */
 .mini-card.active {
   width: var(--card-active-w);
   height: var(--card-active-h);
   border: var(--card-border) solid var(--green);
-  filter: blur(0);
-  box-shadow: 0 17px 4px 0 var(--green), 0 0 0 4px rgba(107,203,119,.3);
+  filter: blur(0) brightness(1);
+  box-shadow: 0 12px 32px rgba(107,203,119,.5);
   z-index: 2;
 }
 
 .mini-card.active::after { opacity: 0; }
 
-/* número/nome sobre o card */
+/* nome sobre o card */
 .mini-card-label {
   position: absolute;
   bottom: .4rem;
@@ -406,47 +290,81 @@ body {
   width: 3.5rem;
   height: 3.5rem;
   border-radius: 50%;
-  border: 3px solid white;
-  background: rgba(255,255,255,.15);
-  backdrop-filter: blur(8px);
+  background: rgba(30,30,30,.75);
+  border: none;
   color: white;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: background .2s, transform .15s;
+  box-shadow: 0 4px 12px rgba(0,0,0,.3);
 }
 
 .carousel-arrow:hover {
-  background: rgba(255,255,255,.35);
+  background: rgba(30,30,30,.95);
   transform: scale(1.1);
 }
 
 .carousel-arrow:active { transform: scale(.95); }
+
+/* ── botão JOGAR ── */
+.jogar-wrapper {
+  display: flex;
+  justify-content: center;
+  /* alinha o botão sob o card ativo */
+  margin-top: .75rem;
+}
+
+.btn-jogar {
+  width: clamp(11rem, var(--card-active-w), 80vw);
+  height: 4.5rem;
+  border-radius: 2.9375rem;
+  border: 10px solid var(--green);
+  background: var(--blue);
+  box-shadow: 0 14px 4px 0 rgba(107,203,119,.6);
+  color: white;
+  font-family: 'Fredoka One', cursive;
+  font-size: 1.6rem;
+  letter-spacing: .15em;
+  cursor: pointer;
+  transition: transform .15s, box-shadow .15s;
+}
+
+.btn-jogar:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 20px 8px 0 rgba(107,203,119,.5);
+}
+
+.btn-jogar:active {
+  transform: translateY(2px);
+  box-shadow: 0 8px 4px 0 rgba(107,203,119,.5);
+}
 
 /* ══════════════════════════════════════════
    RESPONSIVE
 ══════════════════════════════════════════ */
 @media (max-width: 768px) {
   :root {
-    --card-w: 10rem;
-    --card-h: 10rem;
-    --card-active-w: 13rem;
-    --card-active-h: 13rem;
+    --card-w: 8rem;
+    --card-h: 8rem;
+    --card-active-w: 12rem;
+    --card-active-h: 12rem;
     --card-border: 18px;
   }
 
-  .featured-card-inner { border-radius: 1.5rem; }
-  .btn-jogar { font-size: 1.4rem; height: 4.5rem; }
   .carousel-arrow { width: 2.75rem; height: 2.75rem; }
+  .btn-jogar { font-size: 1.3rem; height: 4rem; }
 }
 
 @media (max-width: 480px) {
   :root {
-    --card-w: 7.5rem;
-    --card-h: 7.5rem;
+    --card-w: 6.5rem;
+    --card-h: 6.5rem;
     --card-active-w: 10rem;
     --card-active-h: 10rem;
     --card-border: 14px;
   }
+
+  .btn-jogar { font-size: 1.1rem; height: 3.5rem; }
 }
